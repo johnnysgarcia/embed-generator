@@ -14,7 +14,7 @@
     <div id="pagearea">
     <center><h1>Affiliate Embed Generator</h1></center>
     <div id="inputfields">
-      <form class="embedForm">
+      <form id="embedForm0">
         <div id="newItem0">
           <label>Tour title:</label><br>
           <input type="text" name="title" id="tourTitle0" value="Snorkeling" required></input><br>
@@ -27,7 +27,7 @@
         </div><br>
       </form>
 
-      <form class="embedForm">
+      <form id="embedForm1">
         <div id="newItem1">
           <label>Tour title:</label><br>
           <input type="text" name="title" id="tourTitle1" value="Scuba Diving" required></input><br>
@@ -39,8 +39,11 @@
           <input type="text" name="title" id="tourBooking1" value="fareharbor.com" required></input><br>
         </div><br>
       </form>
-      <br>
     </div>
+    <br>
+    <a class="fh-button-2d-orange" id="addPanel">Add Panel</a>
+    <a class="fh-button-2d-green" id="removePanel">Remove Panel</a>
+    <br><br>
     <a class="fh-button-2d-red" id="generate">Generate Code</a>
 
 
@@ -86,15 +89,7 @@
 
        tempTourBooking = document.getElementById("tourBooking" + i).value;
 
-       embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking))
-
-
-       console.log("tour booking " + i + ' = ' + tempTourBooking);
-
-       console.log("tour title " + i + ' = ' + tempTourTitle);
-       console.log("tour subtitle " + i + ' = ' + tempTourSubtitle);
-       console.log("tour image " + i + ' = ' + tempTourImage);
-
+       embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking));
      }
      /*
      tourTitle0 = document.getElementById("tourTitle0").value;
@@ -109,6 +104,31 @@
      embed.push(new Panel(tourTitle1, tourSubtitle1, tourImage1, tourBooking1));
      */
      updateEmbed();
+   }
+
+   function addPanel(){
+     console.log("add panel");
+     var formCode = `<form id="embedForm` + count + `">
+       <div id="newItem` + count + `">
+         <label>Tour title:</label><br>
+         <input type="text" name="title" id="tourTitle` + count + `" value="Scuba Diving" required></input><br>
+         <label>Tour subtitle:</label><br>
+         <input type="text" name="title" id="tourSubtitle` + count + `" value="The best SCUBA" required></input><br>
+         <label>Image URL:</label><br>
+         <input type="text" name="title" id="tourImage` + count + `" value="https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg" required></input><br>
+         <label>Booking URL:</label><br>
+         <input type="text" name="title" id="tourBooking` + count + `" value="fareharbor.com" required></input><br>
+       </div><br>
+     </form>`;
+     var fields = document.getElementById('inputfields');
+     fields.insertAdjacentHTML('beforeend', formCode);
+     count++;
+
+   }
+
+   function removePanel(){
+     console.log("remove panel")
+
    }
 
      //takes all items in embed array, prints them and displays their code
@@ -131,15 +151,12 @@
 
    </script>
 
-   <script>
-
-   </script>
-
-
-
    <script> 
      jQuery(document).ready(function($){
 $('#generate').bind('click', generate);
+$('#addPanel').bind('click', addPanel);
+$('#removePanel').bind('click', removePanel);
+
 //$('#createButton').bind('click', pushToArray)
      });
    </script>

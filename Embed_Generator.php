@@ -14,62 +14,40 @@
     <div id="pagearea">
     <center><h1>Affiliate Embed Generator</h1></center>
     <div id="inputfields">
-      <form>
-
-
+      <form class="embedForm">
+        <div id="newItem0">
+          <label>Tour title:</label><br>
+          <input type="text" name="title" id="tourTitle0" value="Snorkeling" required></input><br>
+          <label>Tour subtitle:</label><br>
+          <input type="text" name="title" id="tourSubtitle0" value="The best snorkeling around" required></input><br>
+          <label>Image URL:</label><br>
+          <input type="text" name="title" id="tourImage0" value="https://media-prideofmaui.netdna-ssl.com/blog/wp-content/uploads/2019/08/Hawaii-snorkeling-spots-header.jpg" required></input><br>
+          <label>Booking URL:</label><br>
+          <input type="text" name="title" id="tourBooking0" value="fareharbor.com" required></input><br>
+        </div><br>
       </form>
+
+      <form class="embedForm">
+        <div id="newItem1">
+          <label>Tour title:</label><br>
+          <input type="text" name="title" id="tourTitle1" value="Scuba Diving" required></input><br>
+          <label>Tour subtitle:</label><br>
+          <input type="text" name="title" id="tourSubtitle1" value="The best SCUBA" required></input><br>
+          <label>Image URL:</label><br>
+          <input type="text" name="title" id="tourImage1" value="https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg" required></input><br>
+          <label>Booking URL:</label><br>
+          <input type="text" name="title" id="tourBooking1" value="fareharbor.com" required></input><br>
+        </div><br>
+      </form>
+      <br>
     </div>
+    <a class="fh-button-2d-red" id="generate">Generate Code</a>
+
 
     <div id="embed_outer">
 
 
     </div>
-
-    <?php
-    /*
-      class Embed {
-        public static $panels = array();
-
-        public function __construct(){
-          $this->printEmbed();
-        }
-//figure out how to have panel object in panels array, loop through array and print
-        public function printEmbed(){
-            echo '<div id="fh-image-button-container" style="margin-top: 50px;">';
-            //$panel1 = new Panel('Snorkeling', 'The best snorkeling around', 'https://media-prideofmaui.netdna-ssl.com/blog/wp-content/uploads/2019/08/Hawaii-snorkeling-spots-header.jpg', 'fareharbor.com');
-            //$panel2 = new Panel('Scuba Diving', 'The best SCUBA', 'https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg', 'fareharbor.com');
-            echo "</div>";
-        }
-
-      }
-
-
-      class Panel {
-          public $title;
-          public $subtitle;
-          public $image_url;
-          public $booking_url;
-
-          public function __construct($title, $subtitle, $image_url, $booking_url){
-            $this->title = $title;
-            $this->subtitle = $subtitle;
-            $this->image_url = $image_url;
-            $this->booking_url = $booking_url;
-            $this->code = '<a class="image-button -half" style="background-image: url(' . $this->image_url . ');" target="_blank" href="'  . $this->booking_url . '">
-  	                    <span class="tour-info">' . $this->title . '<br><span>'. $this->subtitle . '</span></span>
-  	                    <span class="fh-button-true-flat-red fh-size--small book-btn">Book Now</span></a>';
-            $this->printPanel();
-          }
-
-          public function printPanel(){
-            echo '<a class="image-button -half -tall" style="background-image: url(' . $this->image_url . ');" target="_blank" href="'  . $this->booking_url . '">
-  	                    <span class="tour-info">' . $this->title . '<br><span>'. $this->subtitle . '</span></span>
-  	                    <span class="fh-button-true-flat-red fh-size--small book-btn">Book Now</span></a>';
-          }
-      }
-*/
-     ?>
-    <a class="fh-button-2d-red" id="generate">Generate Code</a>
 
      <h2>Copy and paste this code</h2>
      <center>
@@ -82,23 +60,60 @@
      </center>
    </div>
 
+   <script> 
+
+  </script>
 
    <script>
-     var embed = [];
-     var embedcode = ""
-     var panel1 = new Panel('Snorkeling', 'The best snorkeling around', 'https://media-prideofmaui.netdna-ssl.com/blog/wp-content/uploads/2019/08/Hawaii-snorkeling-spots-header.jpg', 'fareharbor.com');
-     var panel2 = new Panel('Scuba Diving', 'The best SCUBA', 'https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg', 'fareharbor.com');
-     embed.push(panel1);
-     embed.push(panel2);
+   var embed = [];
+   var embedcode = ""
 
 
-     function addPanel(newPanel){
-      embed.push(newPanel);
+   var count = 2;
+   var tempTourTitle;
+   var tempTourSubtitle;
+   var tempTourImage;
+   var tempTourBooking;
+   function generate(){
+     embedcode= "";
+     embed= [];
+     for (var i = 0; i < count; i++){
+       tempTourTitle = document.getElementById("tourTitle" + i).value;
+
+       tempTourSubtitle = document.getElementById("tourSubtitle" + i).value;
+
+       tempTourImage = document.getElementById("tourImage" + i).value;
+
+       tempTourBooking = document.getElementById("tourBooking" + i).value;
+
+       embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking))
+
+
+       console.log("tour booking " + i + ' = ' + tempTourBooking);
+
+       console.log("tour title " + i + ' = ' + tempTourTitle);
+       console.log("tour subtitle " + i + ' = ' + tempTourSubtitle);
+       console.log("tour image " + i + ' = ' + tempTourImage);
+
      }
+     /*
+     tourTitle0 = document.getElementById("tourTitle0").value;
+     tourSubtitle0 = document.getElementById("tourSubtitle0").value;
+     tourImage0 = document.getElementById("tourImage0").value;
+     tourBooking0 = document.getElementById("tourBooking0").value;
+     embed.push(new Panel(tourTitle0, tourSubtitle0, tourImage0, tourBooking0));
+     tourTitle1 = document.getElementById("tourTitle1").value;
+     tourSubtitle1 = document.getElementById("tourSubtitle1").value;
+     tourImage1 = document.getElementById("tourImage1").value;
+     tourBooking1 = document.getElementById("tourBooking1").value;
+     embed.push(new Panel(tourTitle1, tourSubtitle1, tourImage1, tourBooking1));
+     */
+     updateEmbed();
+   }
 
+     //takes all items in embed array, prints them and displays their code
      function updateEmbed(){
        jQuery(document).ready(function($){
-       embedcode= "";
        embedcode += '<div id="fh-image-button-container" style="margin-top: 50px;"> \n'
        for (var i = 0; i < embed.length; i++){
          embedcode += embed[i].code;
@@ -116,11 +131,16 @@
 
    </script>
 
+   <script>
+
+   </script>
+
 
 
    <script> 
      jQuery(document).ready(function($){
-$('#generate').bind('click', updateEmbed)
+$('#generate').bind('click', generate);
+//$('#createButton').bind('click', pushToArray)
      });
    </script>
 

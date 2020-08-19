@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <title>Affiliate Embed Generator</title>
+    <title>Custom Embed Generator</title>
     <link rel="stylesheet" href="template.css" type="text/css">
     <link rel="stylesheet" href="embed_generator.css" type="text/css">
 
@@ -12,7 +12,8 @@
   </head>
   <body>
     <div id="pagearea">
-    <center><h1>Affiliate Embed Generator</h1></center>
+    <center><h1>FareHarbor Custom Embed Generator</h1></center>
+    
     <div id="inputfields">
       <form id="embedForm0">
         <div id="newItem0">
@@ -24,8 +25,22 @@
           <input type="text" name="title" id="tourImage0" value="https://media-prideofmaui.netdna-ssl.com/blog/wp-content/uploads/2019/08/Hawaii-snorkeling-spots-header.jpg" required></input><br>
           <label>Booking URL:</label><br>
           <input type="text" name="title" id="tourBooking0" value="fareharbor.com" required></input><br>
-        </div><br>
+          <!--working on radio -->
+          <label>Panel Width:</label><br>
+          <label>1/3</label><input type="radio" name="width0" value="third" required></input>
+          <label>1/2</label><input type="radio" name="width0" value="half" checked required></input>
+          <label>2/3</label><input type="radio" name="width0" value="twothirds" required></input>
+          <label>Full</label><input type="radio" name="width0" value="full" required></input>
+          <br>
+          <label>Panel Height:</label><br>
+          <label>Tall</label><input type="radio" name="height0" value="tall" required></input>
+          <label>Medium</label><input type="radio" name="height0" value="medium" checked required></input>
+
+          <label>Short</label><input type="radio" name="height0" value="short"  required></input>
+
+        </div>
       </form>
+
 
       <form id="embedForm1">
         <div id="newItem1">
@@ -37,7 +52,17 @@
           <input type="text" name="title" id="tourImage1" value="https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg" required></input><br>
           <label>Booking URL:</label><br>
           <input type="text" name="title" id="tourBooking1" value="fareharbor.com" required></input><br>
-        </div><br>
+          <label>Panel Width:</label><br>
+          <label>1/3</label><input type="radio" name="width1" value="third" required></input>
+          <label>1/2</label><input type="radio" name="width1" value="half" checked required></input>
+          <label>2/3</label><input type="radio" name="width1" value="twothirds" required></input>
+          <label>Full</label><input type="radio" name="width1" value="full" required></input>
+          <br>
+          <label>Panel Height:</label><br>
+          <label>Tall</label><input type="radio" name="height1" value="tall" required></input>
+          <label>Medium</label><input type="radio" name="height1" value="medium" checked required></input>
+          <label>Short</label><input type="radio" name="height1" value="short"  required></input>
+        </div>
       </form>
     </div>
     <br>
@@ -70,16 +95,24 @@
    <script>
    var embed = [];
    var embedcode = ""
-
-
    var count = 2;
    var tempTourTitle;
    var tempTourSubtitle;
    var tempTourImage;
    var tempTourBooking;
+
+   var radioNameWidth;
+   var radioNameHeight;
+   var reqquery;
+   var tempWidth;
+   var tempHeight;
    function generate(){
      embedcode= "";
      embed= [];
+
+
+     //for each set of input fields, creates a panel object. parameters are retrieved by id concatenated with count variable.
+     //pushes each panel object to embed array
      for (var i = 0; i < count; i++){
        tempTourTitle = document.getElementById("tourTitle" + i).value;
 
@@ -89,23 +122,21 @@
 
        tempTourBooking = document.getElementById("tourBooking" + i).value;
 
-       embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking));
+       radioNameWidth = 'width' + (i);
+       radioNameHeight = 'height' + (i);
+       reqquery = 'input[name="' + radioNameWidth + '"]:checked'
+       tempWidth = document.querySelector(reqquery).value;
+       reqquery = 'input[name="' + radioNameHeight + '"]:checked'
+       tempHeight = document.querySelector(reqquery).value;
+
+       embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking, tempWidth, tempHeight));
      }
-     /*
-     tourTitle0 = document.getElementById("tourTitle0").value;
-     tourSubtitle0 = document.getElementById("tourSubtitle0").value;
-     tourImage0 = document.getElementById("tourImage0").value;
-     tourBooking0 = document.getElementById("tourBooking0").value;
-     embed.push(new Panel(tourTitle0, tourSubtitle0, tourImage0, tourBooking0));
-     tourTitle1 = document.getElementById("tourTitle1").value;
-     tourSubtitle1 = document.getElementById("tourSubtitle1").value;
-     tourImage1 = document.getElementById("tourImage1").value;
-     tourBooking1 = document.getElementById("tourBooking1").value;
-     embed.push(new Panel(tourTitle1, tourSubtitle1, tourImage1, tourBooking1));
-     */
+     var form = document.getElementById('embedForm0');
+     console.log()
      updateEmbed();
    }
 
+//concatenates a string with html for input fields, adding the count variable to the id
    function addPanel(){
      console.log("add panel");
      var formCode = `<form id="embedForm` + count + `">
@@ -118,7 +149,16 @@
          <input type="text" name="title" id="tourImage` + count + `" value="https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg" required></input><br>
          <label>Booking URL:</label><br>
          <input type="text" name="title" id="tourBooking` + count + `" value="fareharbor.com" required></input><br>
-       </div><br>
+         <label>Panel Width:</label><br>
+         <label>1/3</label><input type="radio" name="width` + count + `" value="third" required></input>
+         <label>1/2</label><input type="radio" name="width` + count + `" value="half" checked required></input>
+         <label>2/3</label><input type="radio" name="width` + count + `" value="twothirds" required></input>
+         <label>Full</label><input type="radio" name="width` + count + `" value="full" required></input><br>
+         <label>Panel Height:</label><br>
+         <label>Tall</label><input type="radio" name="height` + count + `" value="tall" required></input>
+         <label>Medium</label><input type="radio" name="height` + count + `" value="medium" checked required></input>
+         <label>Short</label><input type="radio" name="height` + count + `" value="short"  required></input>
+       </div>
      </form>`;
      var fields = document.getElementById('inputfields');
      fields.insertAdjacentHTML('beforeend', formCode);
@@ -128,10 +168,18 @@
 
    function removePanel(){
      console.log("remove panel")
-
+     if (count == 1){
+       alert('Embed must have at least one panel')
+     } else {
+     var tempNum = count - 1
+     var formID = 'embedForm' + tempNum;
+     var lastForm = document.getElementById(formID);
+     lastForm.remove();
+     count--;
+   }
    }
 
-     //takes all items in embed array, prints them and displays their code
+     //takes all panels in embed array, prints them and displays their code
      function updateEmbed(){
        jQuery(document).ready(function($){
        embedcode += '<div id="fh-image-button-container" style="margin-top: 50px;"> \n'

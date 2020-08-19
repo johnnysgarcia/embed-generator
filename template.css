@@ -38,6 +38,8 @@ margin-top: 30px;}
       width: 100% !important; } }
   #fh-image-button-container .image-button.-tall {
     height: 17em; }
+    #fh-image-button-container .image-button.-medium {
+      height: 12em; }
   #fh-image-button-container .image-button.-short {
     height: 7em; }
   #fh-image-button-container .image-button.-half {
@@ -60,6 +62,10 @@ margin-top: 30px;}
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0, transparent), to(black));
     background: -webkit-linear-gradient(top, transparent 0, black 100%);
     background: linear-gradient(to bottom, transparent 0, black 100%); }
+  #fh-image-button-container .image-button.-short:before {
+      height: 4em;
+
+  }
 #fh-image-button-container .badge {
   position: absolute;
   top: 0.5em;

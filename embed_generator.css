@@ -2,8 +2,13 @@ textarea {
   width: 100%;
 }
 
-h1 {
+#header{
+  height: 100px;
+}
+
+h1, h2 {
   font-family: sans-serif;
+  margin-top: 50px;
 }
 
 label {
@@ -46,10 +51,11 @@ form {
   margin-bottom: 18px;
   margin-right: 18px;
   border: 2px rgb(11, 11, 11, .41) solid;
+  border-radius: 4px;
 
 }
 
-form div {
+form > div {
   padding: 20px;
 
 }
@@ -57,11 +63,55 @@ form div {
 #inputfields {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
 }
 
-#inputfields form {
-  width: 48%;
+@media only screen and (max-width: 900px) {
+  #inputfields {
+    flex-wrap: wrap;
+  }
 
+  #inputfields form {
+    flex-basis: 98%;
+  }
+
+}
+
+@media only screen and (min-width: 900px) {
+  #inputfields {
+    flex-wrap: wrap;
+  }
+  #inputfields form {
+    flex-basis: 40%;
+    max-width: 48%;
+    flex-grow: 1;
+    flex-shrink: 0;
+
+  }
+}
+
+
+
+#embed_outer {
+border: 2px rgb(11, 11, 11, .41) solid;
+min-height: 200px;
+width: 100%;
+border-radius: 4px;
+
+
+}
+
+.radio {
+  display: flex;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.radio div {
+  margin-right: 15px;
+}
+
+hr {
+  margin: 15px 0px;
 }

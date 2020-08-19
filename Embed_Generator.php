@@ -12,8 +12,9 @@
   </head>
   <body>
     <div id="pagearea">
-    <center><h1>FareHarbor Custom Embed Generator</h1></center>
-    
+      <div id="header">
+          <center><h1>FareHarbor Custom Embed Generator</h1></center>
+      </div>
     <div id="inputfields">
       <form id="embedForm0">
         <div id="newItem0">
@@ -26,17 +27,22 @@
           <label>Booking URL:</label><br>
           <input type="text" name="title" id="tourBooking0" value="fareharbor.com" required></input><br>
           <!--working on radio -->
-          <label>Panel Width:</label><br>
-          <label>1/3</label><input type="radio" name="width0" value="third" required></input>
-          <label>1/2</label><input type="radio" name="width0" value="half" checked required></input>
-          <label>2/3</label><input type="radio" name="width0" value="twothirds" required></input>
-          <label>Full</label><input type="radio" name="width0" value="full" required></input>
-          <br>
-          <label>Panel Height:</label><br>
-          <label>Tall</label><input type="radio" name="height0" value="tall" required></input>
-          <label>Medium</label><input type="radio" name="height0" value="medium" checked required></input>
-
-          <label>Short</label><input type="radio" name="height0" value="short"  required></input>
+        <div class="radio">
+            <div>
+              <label>Panel Width:</label><br>
+              <label>1/3</label><input type="radio" name="width0" value="third" required></input>
+              <label>1/2</label><input type="radio" name="width0" value="half" checked required></input>
+              <label>2/3</label><input type="radio" name="width0" value="twothirds" required></input>
+              <label>Full</label><input type="radio" name="width0" value="full" required></input>
+            </div>
+            <br>
+          <div>
+              <label>Panel Height:</label><br>
+              <label>Tall</label><input type="radio" name="height0" value="tall" required></input>
+              <label>Medium</label><input type="radio" name="height0" value="medium" checked required></input>
+              <label>Short</label><input type="radio" name="height0" value="short"  required></input>
+          </div>
+        </div>
 
         </div>
       </form>
@@ -45,37 +51,45 @@
       <form id="embedForm1">
         <div id="newItem1">
           <label>Tour title:</label><br>
-          <input type="text" name="title" id="tourTitle1" value="Scuba Diving" required></input><br>
+          <input type="text" name="title" id="tourTitle1" value="Scuba Diving" placeholder="" required></input><br>
           <label>Tour subtitle:</label><br>
-          <input type="text" name="title" id="tourSubtitle1" value="The best SCUBA" required></input><br>
+          <input type="text" name="title" id="tourSubtitle1" value="The best Scuba in town" required></input><br>
           <label>Image URL:</label><br>
           <input type="text" name="title" id="tourImage1" value="https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg" required></input><br>
           <label>Booking URL:</label><br>
           <input type="text" name="title" id="tourBooking1" value="fareharbor.com" required></input><br>
-          <label>Panel Width:</label><br>
-          <label>1/3</label><input type="radio" name="width1" value="third" required></input>
-          <label>1/2</label><input type="radio" name="width1" value="half" checked required></input>
-          <label>2/3</label><input type="radio" name="width1" value="twothirds" required></input>
-          <label>Full</label><input type="radio" name="width1" value="full" required></input>
+          <div class="radio">
+            <div>
+              <label>Panel Width:</label><br>
+              <label>1/3</label><input type="radio" name="width1" value="third" required></input>
+              <label>1/2</label><input type="radio" name="width1" value="half" checked required></input>
+              <label>2/3</label><input type="radio" name="width1" value="twothirds" required></input>
+              <label>Full</label><input type="radio" name="width1" value="full" required></input>
+            </div>
           <br>
-          <label>Panel Height:</label><br>
-          <label>Tall</label><input type="radio" name="height1" value="tall" required></input>
-          <label>Medium</label><input type="radio" name="height1" value="medium" checked required></input>
-          <label>Short</label><input type="radio" name="height1" value="short"  required></input>
+            <div>
+              <label>Panel Height:</label><br>
+              <label>Tall</label><input type="radio" name="height1" value="tall" required></input>
+              <label>Medium</label><input type="radio" name="height1" value="medium" checked required></input>
+              <label>Short</label><input type="radio" name="height1" value="short"  required></input>
+            </div>
+          </div>
         </div>
       </form>
     </div>
     <br>
     <a class="fh-button-2d-orange" id="addPanel">Add Panel</a>
-    <a class="fh-button-2d-green" id="removePanel">Remove Panel</a>
+    <a class="fh-button-2d-red" id="removePanel">Remove Panel</a>
     <br><br>
-    <a class="fh-button-2d-red" id="generate">Generate Code</a>
+    <a class="fh-button-2d-green" id="generate">Generate Code</a>
+<hr>
+
+    <h2>Embed Preview:</h2>
+
+      <div id="embed_outer">
 
 
-    <div id="embed_outer">
-
-
-    </div>
+      </div>
 
      <h2>Copy and paste this code</h2>
      <center>
@@ -110,18 +124,13 @@
      embedcode= "";
      embed= [];
 
-
      //for each set of input fields, creates a panel object. parameters are retrieved by id concatenated with count variable.
      //pushes each panel object to embed array
      for (var i = 0; i < count; i++){
        tempTourTitle = document.getElementById("tourTitle" + i).value;
-
        tempTourSubtitle = document.getElementById("tourSubtitle" + i).value;
-
        tempTourImage = document.getElementById("tourImage" + i).value;
-
        tempTourBooking = document.getElementById("tourBooking" + i).value;
-
        radioNameWidth = 'width' + (i);
        radioNameHeight = 'height' + (i);
        reqquery = 'input[name="' + radioNameWidth + '"]:checked'
@@ -131,33 +140,37 @@
 
        embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking, tempWidth, tempHeight));
      }
-     var form = document.getElementById('embedForm0');
      console.log()
      updateEmbed();
    }
 
 //concatenates a string with html for input fields, adding the count variable to the id
    function addPanel(){
-     console.log("add panel");
      var formCode = `<form id="embedForm` + count + `">
        <div id="newItem` + count + `">
          <label>Tour title:</label><br>
-         <input type="text" name="title" id="tourTitle` + count + `" value="Scuba Diving" required></input><br>
+         <input type="text" name="title" id="tourTitle` + count + `"  required></input><br>
          <label>Tour subtitle:</label><br>
-         <input type="text" name="title" id="tourSubtitle` + count + `" value="The best SCUBA" required></input><br>
+         <input type="text" name="title" id="tourSubtitle` + count + `"  required></input><br>
          <label>Image URL:</label><br>
-         <input type="text" name="title" id="tourImage` + count + `" value="https://www.squalodivers.com/wp-content/uploads/2017/04/Adventure-diver.jpg" required></input><br>
+         <input type="text" name="title" id="tourImage` + count + `" required></input><br>
          <label>Booking URL:</label><br>
-         <input type="text" name="title" id="tourBooking` + count + `" value="fareharbor.com" required></input><br>
-         <label>Panel Width:</label><br>
-         <label>1/3</label><input type="radio" name="width` + count + `" value="third" required></input>
-         <label>1/2</label><input type="radio" name="width` + count + `" value="half" checked required></input>
-         <label>2/3</label><input type="radio" name="width` + count + `" value="twothirds" required></input>
-         <label>Full</label><input type="radio" name="width` + count + `" value="full" required></input><br>
-         <label>Panel Height:</label><br>
-         <label>Tall</label><input type="radio" name="height` + count + `" value="tall" required></input>
-         <label>Medium</label><input type="radio" name="height` + count + `" value="medium" checked required></input>
-         <label>Short</label><input type="radio" name="height` + count + `" value="short"  required></input>
+         <input type="text" name="title" id="tourBooking` + count + `" required></input><br>
+         <div class="radio">
+            <div>
+              <label>Panel Width:</label><br>
+              <label>1/3</label><input type="radio" name="width` + count + `" value="third" required></input>
+              <label>1/2</label><input type="radio" name="width` + count + `" value="half" checked required></input>
+              <label>2/3</label><input type="radio" name="width` + count + `" value="twothirds" required></input>
+              <label>Full</label><input type="radio" name="width` + count + `" value="full" required></input><br>
+            </div>
+            <div>
+               <label>Panel Height:</label><br>
+               <label>Tall</label><input type="radio" name="height` + count + `" value="tall" required></input>
+               <label>Medium</label><input type="radio" name="height` + count + `" value="medium" checked required></input>
+               <label>Short</label><input type="radio" name="height` + count + `" value="short"  required></input>
+           </div>
+         </div>
        </div>
      </form>`;
      var fields = document.getElementById('inputfields');
@@ -182,7 +195,8 @@
      //takes all panels in embed array, prints them and displays their code
      function updateEmbed(){
        jQuery(document).ready(function($){
-       embedcode += '<div id="fh-image-button-container" style="margin-top: 50px;"> \n'
+      embedcode += '<link rel="stylesheet" href="https://fh-kit.com/buttons/v2/?red=cc0000&orange=ff6000&green=3AB134" type="text/css" media="screen" /> \n'
+       embedcode += '<div id="fh-image-button-container"> \n'
        for (var i = 0; i < embed.length; i++){
          embedcode += embed[i].code;
          embedcode += '\n';

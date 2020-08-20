@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="template.css" type="text/css">
     <link rel="stylesheet" href="embed_generator.css" type="text/css">
 
-    <link rel="stylesheet" href="https://fh-kit.com/buttons/v2/?red=cc0000&orange=ff6000&green=3AB134" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://fh-kit.com/buttons/v2/?red=cc0000&blue=256BB9&green=3AB134" type="text/css" media="screen" />
 <script src="embed_generator.js"></script>
   </head>
   <body>
+    <div id="header">
+        <center><h1>FareHarbor Custom Embed Generator</h1></center>
+    </div>
+
     <div id="pagearea">
-      <div id="header">
-          <center><h1>FareHarbor Custom Embed Generator</h1></center>
-      </div>
+
     <div id="inputfields">
       <form id="embedForm0">
         <div id="newItem0">
@@ -41,6 +43,10 @@
               <label>Tall</label><input type="radio" name="height0" value="tall" required></input>
               <label>Medium</label><input type="radio" name="height0" value="medium" checked required></input>
               <label>Short</label><input type="radio" name="height0" value="short"  required></input>
+          </div>
+          <div id="buttonText">
+            <label>Button Text:</label><br>
+            <input type="text" id="buttonText0" value="Book Now" required></input>
           </div>
         </div>
 
@@ -73,16 +79,20 @@
               <label>Medium</label><input type="radio" name="height1" value="medium" checked required></input>
               <label>Short</label><input type="radio" name="height1" value="short"  required></input>
             </div>
+            <div>
+              <label>Button Text:</label><br>
+              <input type="text" id="buttonText1" value="Book Now" required></input>
+            </div>
           </div>
         </div>
       </form>
     </div>
     <br>
-    <a class="fh-button-2d-orange" id="addPanel">Add Panel</a>
-    <a class="fh-button-2d-red" id="removePanel">Remove Panel</a>
+    <a class="fh-button-outline-blue fh-shape--round" id="addPanel">Add Panel</a>
+    <a class="fh-button-outline-blue fh-shape--round" id="removePanel">Remove Panel</a>
     <br><br>
-    <a class="fh-button-2d-green" id="generate">Generate Code</a>
-<hr>
+    <a class="fh-button-outline-green fh-shape--round" id="generate">Generate Code</a>
+
 
     <h2>Embed Preview:</h2>
 
@@ -120,6 +130,7 @@
    var reqquery;
    var tempWidth;
    var tempHeight;
+   var tempButtonText;
    function generate(){
      embedcode= "";
      embed= [];
@@ -131,6 +142,7 @@
        tempTourSubtitle = document.getElementById("tourSubtitle" + i).value;
        tempTourImage = document.getElementById("tourImage" + i).value;
        tempTourBooking = document.getElementById("tourBooking" + i).value;
+       tempButtonText = document.getElementById("buttonText" + i).value;
        radioNameWidth = 'width' + (i);
        radioNameHeight = 'height' + (i);
        reqquery = 'input[name="' + radioNameWidth + '"]:checked'
@@ -138,7 +150,7 @@
        reqquery = 'input[name="' + radioNameHeight + '"]:checked'
        tempHeight = document.querySelector(reqquery).value;
 
-       embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking, tempWidth, tempHeight));
+       embed.push(new Panel(tempTourTitle, tempTourSubtitle, tempTourImage, tempTourBooking, tempWidth, tempHeight, tempButtonText));
      }
      console.log()
      updateEmbed();
@@ -169,6 +181,10 @@
                <label>Tall</label><input type="radio" name="height` + count + `" value="tall" required></input>
                <label>Medium</label><input type="radio" name="height` + count + `" value="medium" checked required></input>
                <label>Short</label><input type="radio" name="height` + count + `" value="short"  required></input>
+           </div>
+           <div>
+             <label>Button Text:</label><br>
+             <input type="text" id="buttonText` + count + `" value="Book Now" required></input>
            </div>
          </div>
        </div>
@@ -222,7 +238,9 @@ $('#removePanel').bind('click', removePanel);
 //$('#createButton').bind('click', pushToArray)
      });
    </script>
+   <footer>
 
+   </footer>
 
   </body>
 </html>

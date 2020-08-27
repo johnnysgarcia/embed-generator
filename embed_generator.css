@@ -57,8 +57,33 @@ input[type=text]{
   width: 100%;
   height: 30px;
   color: rgb(11, 11, 11, .61)
-
 }
+
+.fh-size--small{
+  -webkit-box-direction: normal;
+  margin: 0 !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  text-align: center !important;
+  font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif !important;
+  padding: 0.2em 1em !important;
+  line-height: 2 !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  position: absolute;
+  right: 1em;
+}
+input[type=color]{
+  padding: 0px;
+  margin-bottom: 15px;
+  width: 44px;
+    height: 23px;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(74, 74, 74));
+}
+
 input[type=radio]{
   margin-right: 18px;
   color: rgb(11, 11, 11, .61)

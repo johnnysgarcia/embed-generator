@@ -1,3 +1,5 @@
+
+//panel class holds info for each tour listing on embed
 class Panel {
   constructor(title, subtitle, imageurl, fhlink, width, height, buttonText){
     if (title == ''){
@@ -17,6 +19,7 @@ class Panel {
 
 }
 
+//input field class, holds info for form that collects tour info
 class InputField {
   constructor(count){
     this.count = count;
@@ -74,6 +77,8 @@ var tempButtonColor;
 var fields = [];
 var fieldsCode = ""
 
+
+//creates two forms to start with and pushes them onto fields array
 function createFields(){
   jQuery(document).ready(function($){
 console.log("fields created");
@@ -85,6 +90,7 @@ displayFields();
   });
 }
 
+//appends forms onto page
 function displayFields(){
  fieldsCode = "";
  for (var i = 0; i < count; i++){
@@ -94,6 +100,7 @@ function displayFields(){
   $('#inputfields').html(fieldsCode)
 }
 
+//appends code for new form onto existing forms code
 function addField(){
   fields.push(new InputField(count));
   fieldsCode += fields[count].code;
@@ -103,6 +110,7 @@ function addField(){
   //displayFields();
 }
 
+//removes last form from forms code
 function removeField(){
   if (count == 1){
     alert('Embed must have at least one panel')
@@ -117,6 +125,7 @@ function removeField(){
 }
 }
 
+//iterates through all forms and creates a panel for each, pushes them onto embed array then renders 
 function generate(){
   embedcode= "";
   embed= [];
